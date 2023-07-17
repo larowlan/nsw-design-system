@@ -16,6 +16,17 @@ class FileUpload {
       if (this.input.value === '') return
       this.updateFileList()
     })
+
+    this.input.addEventListener('dragenter', (event) => {
+      event.preventDefault()
+      this.element.classList.add('drag-over')
+    })
+    this.input.addEventListener('dragleave', () => {
+      this.element.classList.remove('drag-over')
+    })
+    this.input.addEventListener('drop', () => {
+      this.element.classList.remove('drag-over')
+    })
   }
 
   createFileList() {
@@ -69,6 +80,7 @@ class FileUpload {
       const item = event.target.closest('.nsw-file-upload__item')
 
       item.remove()
+      this.input.value = ''
 
       if (event.currentTarget.children.length === 0) {
         this.filesList.classList.remove('active')
