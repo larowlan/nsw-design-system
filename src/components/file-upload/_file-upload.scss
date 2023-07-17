@@ -33,7 +33,7 @@
     border: 0;
 
     &.active {
-      display: grid;
+      display: block;
     }
   }
 
@@ -50,6 +50,11 @@
     &:not(:last-child) {
       margin-bottom: rem(8px);
     }
+
+    .nsw-icon-button {
+      cursor: pointer;
+      z-index: 1;
+    }
   }
 
   &__item-filename {
@@ -59,38 +64,37 @@
     white-space: nowrap;
   }
 
-  .nsw-icon-button {
-    cursor: pointer;
-  }
-
   &.drag-over {
     border: rem(4px) dashed var(--nsw-brand-dark);
     border-radius: var(--nsw-border-radius);
     background: var(--nsw-grey-04);
-    height: rem(140px);
+    height: 100%;
+    min-height: rem(120px);
     box-sizing: border-box;
+
+    &::before,
+    &::after {
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
 
     &::before {
       @include material-icons;
       content: 'download';
       font-size: rem(map-get($nsw-icon-sizes, 24));
-      position: absolute;
       top: calc(50% - 12px);
-      left: 50%;
-      transform: translate(-50%, -50%);
     }
 
     &::after {
       content: 'Drop anywhere to upload';
-      position: absolute;
       top: calc(50% + 12px);
-      left: 50%;
-      transform: translate(-50%, -50%);
     }
 
     .nsw-file-upload__label ,
     .nsw-file-upload__item {
-      display: none;
+      visibility: hidden;
     }
   }
 }

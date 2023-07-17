@@ -17,7 +17,7 @@ class FileUpload {
       this.updateFileList()
     })
 
-    this.input.addEventListener('dragenter', (event) => {
+    this.input.addEventListener('dragover', (event) => {
       event.preventDefault()
       this.element.classList.add('drag-over')
     })
