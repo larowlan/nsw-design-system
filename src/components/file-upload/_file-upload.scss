@@ -12,6 +12,8 @@
     height: 100%;
     width: 100%;
     opacity: 0;
+    width: 100%;
+    right: 0;
     cursor: pointer;
 
     &:disabled {
@@ -23,6 +25,11 @@
     
     &:focus + .nsw-file-upload__label {
       @include nsw-focus;
+    }
+    
+    &:hover + .nsw-file-upload__label {
+      background: var(--nsw-brand-dark);
+      color: var(--nsw-white);
     }
   }
 
