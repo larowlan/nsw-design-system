@@ -77,7 +77,7 @@
 	    }
 	],
 	"error": true,
-	"error-text": "Please select an area"
+	"error-text": "Please select a category"
   },
   "dates": {
 	"list": [
@@ -91,6 +91,6 @@
 	    }
 	],
 	"error": true,
-	"error-text": "Please select a date range"
+	"error-text": "Please enter a date"
   }
 }

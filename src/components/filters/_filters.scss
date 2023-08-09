@@ -601,6 +601,25 @@
     }
   }
 
+  .nsw-form {
+    &__input {
+      &[aria-invalid='true'],
+      &.has-error {
+        border-color: var(--nsw-status-error);
+        border-width: 2px;
+
+        &:hover {
+          background: var(--nsw-status-error-bg);
+        }
+      }
+    }
+
+    &__label-checkboxes + &[aria-invalid='true'] {
+      border-color: var(--nsw-status-error);
+      border-width: 2px;
+    }
+  }
+
   &__helper {
     @include font-size('xs');
     display: block;

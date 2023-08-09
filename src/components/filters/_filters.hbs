@@ -38,11 +38,13 @@
         {{/if}}
         <div class="nsw-filters__item-content">
           <label class="nsw-form__label{{#if collapsed}} sr-only{{/if}}" for="{{input.id}}-{{filters-id}}">{{input.name}}</label>
-          <input class="nsw-form__input" type="text" id="{{input.id}}-{{filters-id}}" name="filters-keyword"{{#if input.value}} value="{{input.value}}"{{/if}}>
+          <input class="nsw-form__input" type="text" id="{{input.id}}-{{filters-id}}" name="filters-keyword"{{#if input.value}} value="{{input.value}}"{{/if}} {{#if input.error}} aria-invalid="true"{{/if}}>
         </div>
-        {{#if input.error}}
-          <span class="nsw-form__helper nsw-form__helper--error"><span class="material-icons nsw-material-icons" focusable="false" aria-hidden="true">cancel</span>{{#if input.error-text}}{{input.error-text}}{{else}}This field is required{{/if}}</span>
-        {{/if}}
+        {{#unless collapsed}}
+          {{#if input.error}}
+            <span class="nsw-form__helper nsw-form__helper--error"><span class="material-icons nsw-material-icons" focusable="false" aria-hidden="true">cancel</span>{{#if input.error-text}}{{input.error-text}}{{else}}This field is required{{/if}}</span>
+          {{/if}}
+        {{/unless}}
       </div>
       {{/if}}
       {{#if select}}
@@ -56,16 +58,18 @@
         <div class="nsw-filters__item-content">
           <label class="nsw-form__label{{#if collapsed}} sr-only{{/if}}" for="{{select.id}}-{{filters-id}}">{{select.name}}</label>{{#if multiple}}
           <div class="nsw-multi-select js-multi-select" data-selection-text="savings programs">{{/if}}
-            <select{{#unless multiple}} class="nsw-form__select"{{/unless}} name="{{select.id}}-{{filters-id}}" id="{{select.id}}-{{filters-id}}"{{#if helper-text}} aria-describedby="{{#if helper-text}}{{select.id}}-{{filters-id}}-helper-text{{/if}}"{{/if}}{{#if error-text}} aria-invalid="true"{{/if}}{{#if multiple}} multiple{{/if}}>{{#unless multiple}}<option value="">Please select</option>{{/unless}}
+            <select{{#unless multiple}} class="nsw-form__select"{{/unless}} name="{{select.id}}-{{filters-id}}" id="{{select.id}}-{{filters-id}}"{{#if helper-text}} aria-describedby="{{#if helper-text}}{{select.id}}-{{filters-id}}-helper-text{{/if}}"{{/if}} {{#if select.error}} aria-invalid="true"{{/if}}{{#if multiple}} multiple{{/if}}>{{#unless multiple}}<option value="">Please select</option>{{/unless}}
             {{#each select.list}}
               <option value="{{this}}">{{this}}</option>
             {{/each}}
             </select>{{#if multiple}}
           </div>{{/if}}
         </div>
-        {{#if select.error}}
-          <span class="nsw-form__helper nsw-form__helper--error"><span class="material-icons nsw-material-icons" focusable="false" aria-hidden="true">cancel</span>{{#if select.error-text}}{{select.error-text}}{{else}}This field is required{{/if}}</span>
-        {{/if}}
+        {{#unless collapsed}}
+          {{#if select.error}}
+            <span class="nsw-form__helper nsw-form__helper--error"><span class="material-icons nsw-material-icons" focusable="false" aria-hidden="true">cancel</span>{{#if select.error-text}}{{select.error-text}}{{else}}This field is required{{/if}}</span>
+          {{/if}}
+        {{/unless}}
       </div>
       {{/if}}
       {{#if checkboxes}}
@@ -81,7 +85,7 @@
             <legend class="nsw-form__legend{{#if collapsed}} sr-only{{/if}}">{{checkboxes.name}}</legend>
             {{#each checkboxes.list}}
             <input class="nsw-form__checkbox-input" type="checkbox" name="{{name}}" value="{{title}}" id="{{id}}-{{../filters-id}}"{{#if checked}} checked{{/if}}>
-            <label class="nsw-form__checkbox-label" for="{{id}}-{{../filters-id}}">{{title}}</label>
+            <label class="nsw-form__checkbox-label" for="{{id}}-{{../filters-id}}" {{#if checkboxes.error}} aria-invalid="true"{{/if}}>{{title}}</label>
             {{/each}}
             {{#if checkboxes.all}}
             <div class="nsw-filters__all hidden">
@@ -94,9 +98,11 @@
             {{/if}}
           </fieldset>
         </div>
-        {{#if checkboxes.error}}
-          <span class="nsw-form__helper nsw-form__helper--error"><span class="material-icons nsw-material-icons" focusable="false" aria-hidden="true">cancel</span>{{#if input.error-text}}{{input.error-text}}{{else}}This field is required{{/if}}</span>
-        {{/if}}
+        {{#unless collapsed}}
+          {{#if checkboxes.error}}
+            <span class="nsw-form__helper nsw-form__helper--error"><span class="material-icons nsw-material-icons" focusable="false" aria-hidden="true">cancel</span>{{#if checkboxes.error-text}}{{checkboxes.error-text}}{{else}}This field is required{{/if}}</span>
+          {{/if}}
+        {{/unless}}
       </div>
       {{/if}}
       {{#if dates}}
@@ -115,24 +121,26 @@
               <div class="nsw-form__date-wrapper">
                 <div class="nsw-form__date-input">
                   <label class="nsw-form__label nsw-form__label--small" for="{{id}}-{{../filters-id}}-day">Day</label>
-                  <input class="nsw-form__input" type="text" maxlength="2" id="{{id}}-{{../filters-id}}-day" name="{{id}}-{{../filters-id}}-day">
+                  <input class="nsw-form__input" type="text" maxlength="2" id="{{id}}-{{../filters-id}}-day" name="{{id}}-{{../filters-id}}-day" {{#if dates.error}} aria-invalid="true"{{/if}}>
                 </div>
                 <div class="nsw-form__date-input">
                   <label class="nsw-form__label nsw-form__label--small" for="{{id}}-{{../filters-id}}-month">Month</label>
-                  <input class="nsw-form__input" type="text" maxlength="2" id="{{id}}-{{../filters-id}}-month" name="{{id}}-{{../filters-id}}-month">
+                  <input class="nsw-form__input" type="text" maxlength="2" id="{{id}}-{{../filters-id}}-month" name="{{id}}-{{../filters-id}}-month" {{#if checkboxes.error}} aria-invalid="true"{{/if}}>
                 </div>
                 <div class="nsw-form__date-input nsw-form__date-input--large">
                   <label class="nsw-form__label nsw-form__label--small" for="{{id}}-{{../filters-id}}-year">Year</label>
-                  <input class="nsw-form__input" type="text" maxlength="4" id="{{id}}-{{../filters-id}}-year" name="{{id}}-{{../filters-id}}-year">
+                  <input class="nsw-form__input" type="text" maxlength="4" id="{{id}}-{{../filters-id}}-year" name="{{id}}-{{../filters-id}}-year" {{#if checkboxes.error}} aria-invalid="true"{{/if}}>
                 </div>
               </div>
             </fieldset>
           </div>
           {{/each}}
         </div>
-        {{#if dates.error}}
-          <span class="nsw-form__helper nsw-form__helper--error"><span class="material-icons nsw-material-icons" focusable="false" aria-hidden="true">cancel</span>{{#if dates.error-text}}{{dates.error-text}}{{else}}This field is required{{/if}}</span>
-        {{/if}}
+        {{#unless collapsed}}
+          {{#if dates.error}}
+            <span class="nsw-form__helper nsw-form__helper--error"><span class="material-icons nsw-material-icons" focusable="false" aria-hidden="true">cancel</span>{{#if dates.error-text}}{{dates.error-text}}{{else}}This field is required{{/if}}</span>
+          {{/if}}
+        {{/unless}}
       </div>
       {{/if}}    
     </div>

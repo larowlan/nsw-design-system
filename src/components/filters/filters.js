@@ -20,6 +20,7 @@ class Filters {
     /* eslint-disable max-len */
     this.focusableEls = this.filtersWrapper.querySelectorAll('a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled])')
     this.checkIcon = '<span class="material-icons nsw-material-icons nsw-filters__helper--valid" focusable="false" aria-hidden="true">check_circle</span>'
+    this.errorIcon = '<span class="material-icons nsw-material-icons nsw-filters__helper--error" focusable="false" aria-hidden="true">cancel</span>'
     this.arrowIcon = '<span class="material-icons nsw-material-icons" focusable="false" aria-hidden="true">keyboard_arrow_right</span>'
     /* eslint-ensable max-len */
     this.showEvent = (e) => this.showFilters(e)
@@ -280,10 +281,17 @@ class Filters {
       options.array.forEach((element, index) => {
         const getEventType = this.constructor.getEventType(element.type)
         const { singleID } = this.constructor.singleCount(element, index, id)
+
+        if (element.getAttribute('aria-invalid') === 'true') {
+          text.innerHTML = `${text.textContent} ${this.errorIcon}`
+        }
+
         if (this.constructor.getCondition(element)) {
           if (text) {
             text.textContent = labelText
             text.innerHTML = `${text.textContent} ${this.checkIcon}`
+          } else {
+            text.innerHTML = `${text.textContent} ${this.errorIcon}`
           }
         }
         element.addEventListener(getEventType, () => {
@@ -300,6 +308,7 @@ class Filters {
               text.innerHTML = `${text.textContent} ${this.checkIcon}`
             } else {
               text.textContent = labelText
+              text.innerHTML = `${text.textContent} ${this.errorIcon}`
             }
           }
         })
