@@ -96,7 +96,7 @@ $nsw-form-tick: '<svg fill="#ffffff" version="1.1" xmlns="http://www.w3.org/2000
     &:focus {
       @include nsw-focus;
 
-      .nsw-section--invert & {    
+      .nsw-section--invert & {  
         @include nsw-focus($color: var(--nsw-focus-light));
       }
     }
@@ -129,6 +129,10 @@ $nsw-form-tick: '<svg fill="#ffffff" version="1.1" xmlns="http://www.w3.org/2000
       &:hover {
         background: var(--nsw-status-error-bg);
       }
+    }
+
+    .nsw-section--invert & {    
+      border-color: var(--nsw-white);
     }
   }
 
